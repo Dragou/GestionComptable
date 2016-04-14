@@ -11,7 +11,13 @@ public class Actions {
 	private Boolean validate;
 	private String automated;
 	
-	public Action(){
-		
+	public Actions(String uneCategorie, String unType, float unAmount, Date uneDate, String unAutomated){
+		this.categorie = uneCategorie;
+		this.type = unType;
+		this.amount = unAmount;
+		this.date = uneDate;
+		this.validate = false;
+		this.automated = unAutomated;		
 	}
+	
 }
