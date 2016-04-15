@@ -22,7 +22,7 @@ public class AppliMain {
 			switch (choice) {
 			case 1:
 				Actions myAction = createAction();
-				myAccount.AddAction(myAction);
+				myAccount.addAction(myAction);
 				break;
 			case 2:
 				myAccount.showAllActions();
@@ -63,7 +63,7 @@ public class AppliMain {
 		String type = sc.nextLine();
 		System.out.println("Saisir le montant :");
 		float amount = sc.nextFloat();
-		return new Actions(cat, type, amount, new Date(), "false");
+		return new Actions(1, "Sans titre",cat, type, amount, new Date(), "false");
 	}
 
 	public static void initAccount(){

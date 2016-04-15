@@ -23,9 +23,8 @@ public class Account implements Serializable{
 		this.listAction = new ArrayList<Actions>();
 	}
 	
-	public void AddAction(Actions newAction){
-		newAction.Check();
-		float actionAmount  = newAction.GetAmount();
+	public void addAction(Actions newAction){
+		float actionAmount  = newAction.getAmount();
 		this.currentAmount += actionAmount;
 		this.listAction.add(newAction);
 	}
@@ -52,4 +51,6 @@ public class Account implements Serializable{
 		
 		return max;		
 	}
+	
+	
 }
