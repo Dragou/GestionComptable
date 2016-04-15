@@ -29,8 +29,8 @@ public class Account implements Serializable{
 		this.listAction.add(newAction);
 	}
 	
-	public void deleteAction(){
-		
+	public void deleteAction(Actions newAction){
+		this.listAction.remove(newAction);
 	}
 	
 	public void showAllActions(){
@@ -49,8 +49,7 @@ public class Account implements Serializable{
 		
 		int max = Collections.max(listId);
 		
-		return max;
-		
+		return max;		
 	}
 	
 	

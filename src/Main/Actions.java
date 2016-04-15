@@ -12,7 +12,8 @@ public class Actions {
 	private Boolean validate;
 	private String automated;
 	
-	public Actions(String unLibelle,String uneCategorie, String unType, float unAmount, Date uneDate, String unAutomated){
+	public Actions(int unId, String unLibelle,String uneCategorie, String unType, float unAmount, Date uneDate, String unAutomated){
+		this.id = unId;
 		this.categorie = uneCategorie;
 		this.libelle = unLibelle;
 		this.type = unType;
@@ -56,6 +57,19 @@ public class Actions {
 		this.date = uneAction.date;
 		this.validate = uneAction.validate;
 		this.automated = uneAction.automated;
+	}
+	
+	public Boolean equals(Actions uneAction){
+		Boolean bool = false;
+		
+		if(this.id == uneAction.id){
+			bool = true;
+		}
+		else{
+			bool = false;
+		}
+			
+		return bool;		
 	}
 	
 }
