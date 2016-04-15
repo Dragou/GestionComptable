@@ -1,5 +1,11 @@
 package Main;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -8,20 +14,79 @@ public class AppliMain {
 	private static Scanner sc;
 	
 	public static void main(String[] args){
-		int choice = 0;
-		do
-		{
-			choice = Menu();
-			switch (choice) {
-			case 1:
-				Actions myAction = CreateAction();
-				myAccount.AddAction(myAction);
-				break;
-
-			default:
-				break;
+		
+		ArrayList<Account> p = null;
+		try {
+			// ouverture d'un flux d'entrée depuis le fichier "Account.serial"
+			FileInputStream fis = new FileInputStream("Account.serial");
+			// création d'un "flux objet" avec le flux fichier
+			ObjectInputStream ois= new ObjectInputStream(fis);
+			try {	
+				// désérialisation : lecture de l'objet depuis le flux d'entrée
+				p = (ArrayList<Account>) ois.readObject(); 
+			} finally {
+				// on ferme les flux
+				try {
+					ois.close();
+				} finally {
+					fis.close();
+				}
 			}
-		}while(choice != 4);
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
+		} catch(ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+		if(p != null) {
+			System.out.println(p + " a ete deserialise");
+			System.out.println(p.toString());
+		}
+		
+//		try {
+//			// création d'une Account
+//			ArrayList<Account> p = new ArrayList<Account>();
+//			p.add(new Account("Dupont", 20));
+//			p.add(new Account("Dujean", 0));
+//			System.out.println("creation de : " + p);
+//
+//			// ouverture d'un flux de sortie vers le fichier "Account.serial"
+//			FileOutputStream fos = new FileOutputStream("Account.serial");
+//
+//			// création d'un "flux objet" avec le flux fichier
+//			ObjectOutputStream oos= new ObjectOutputStream(fos);
+//			try {
+//				// sérialisation : écriture de l'objet dans le flux de sortie
+//				oos.writeObject(p); 
+//				// on vide le tampon
+//				oos.flush();
+//				System.out.println(p + " a ete serialise");
+//				
+//			} finally {
+//				//fermeture des flux
+//				try {
+//					oos.close();
+//				} finally {
+//					fos.close();
+//				}
+//			}
+//		} catch(IOException ioe) {
+//			ioe.printStackTrace();
+//		}
+		
+//		int choice = 0;
+//		do
+//		{
+//			choice = Menu();
+//			switch (choice) {
+//			case 1:
+//				Actions myAction = CreateAction();
+//				myAccount.AddAction(myAction);
+//				break;
+//
+//			default:
+//				break;
+//			}
+//		}while(choice != 4);
 	}
 	
 	private static Actions CreateAction() {
