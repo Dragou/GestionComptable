@@ -30,4 +30,13 @@ public class Actions {
 		return 0;
 	}
 	
+	
+	public void modifyAction(Actions uneAction){
+		this.categorie = uneAction.categorie;
+		this.type = uneAction.type;
+		this.amount = uneAction.amount;
+		this.date = uneAction.date;
+		this.validate = uneAction.validate;
+		this.automated = uneAction.automated;
+	}
 }
