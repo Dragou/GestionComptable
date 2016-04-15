@@ -20,14 +20,14 @@ public class Actions {
 		this.automated = unAutomated;
 	}
 
-	public void Check() {
-		// TODO Check si l'action est correcte ou non
+	//Renvoyer le montant avec un "-" si c'est un débit
+	public float getAmount() {
+		float montant = this.amount;
 		
-	}
-
-	public float GetAmount() {
-		// TODO Renvoyer le montant avec un "-" si c'est un débit
-		return 0;
+		if(this.type == "DEBIT"){
+			montant = montant * (-1);
+		}
+		return montant;
 	}
 	
 	
@@ -39,4 +39,5 @@ public class Actions {
 		this.validate = uneAction.validate;
 		this.automated = uneAction.automated;
 	}
+	
 }
