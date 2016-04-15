@@ -33,7 +33,7 @@ public class Account implements Serializable{
 		
 	}
 	
-	public void showAction(){
+	public void showAllActions(){
 		System.out.println("Toutes les actions sur le comte " + this.name + ": ");
 		for (Actions action : listAction) {
 			action.showAction(action);
