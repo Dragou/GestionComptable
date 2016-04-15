@@ -25,7 +25,7 @@ public class AppliMain {
 				myAccount.AddAction(myAction);
 				break;
 			case 2:
-				myAccount.ShowAction();
+				myAccount.showAllAction();
 				
 				break;
 			default:
@@ -42,7 +42,7 @@ public class AppliMain {
 			try {
 				oos.writeObject(myAccount); 
 				oos.flush();
-				System.out.println("Sauvegarde effectuée");
+				System.out.println("Sauvegarde effectué");
 			} finally {
 				try {
 					oos.close();
