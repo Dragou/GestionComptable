@@ -25,7 +25,7 @@ public class AppliMain {
 				myAccount.AddAction(myAction);
 				break;
 			case 2:
-				myAccount.showAllAction();
+				myAccount.showAllActions();
 				
 				break;
 			default:

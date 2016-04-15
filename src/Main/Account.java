@@ -2,6 +2,7 @@ package Main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Account implements Serializable{
 
@@ -29,7 +30,26 @@ public class Account implements Serializable{
 		this.listAction.add(newAction);
 	}
 	
-	public void DeleteAction(){
+	public void deleteAction(Actions newAction){
+		this.listAction.remove(newAction);
+	}
+	
+	public void showAllActions(){
+		System.out.println("Toutes les actions sur le comte " + this.name + ": ");
+		for (Actions action : listAction) {
+			action.showAction(action);
+		}
+	}
+	
+	public int getLastIdActions(){
+		ArrayList<Integer> listId = new ArrayList<Integer>();
 		
+		for (Actions actions : listAction) {
+			listId.add(actions.getId());			
+		}
+		
+		int max = Collections.max(listId);
+		
+		return max;		
 	}
 }
