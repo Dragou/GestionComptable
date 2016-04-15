@@ -23,7 +23,6 @@ public class Account implements Serializable{
 	}
 	
 	public void AddAction(Actions newAction){
-		newAction.Check();
 		float actionAmount  = newAction.GetAmount();
 		this.currentAmount += actionAmount;
 		this.listAction.add(newAction);
