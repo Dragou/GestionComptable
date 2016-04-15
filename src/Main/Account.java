@@ -9,6 +9,12 @@ public class Account {
 	private float currentAmount;
 	private ArrayList<Actions> listAction;
 	
+	public Account(){
+		this.name = "Sans titre";
+		this.currentAmount = 0;
+		this.listAction = new ArrayList<Actions>();
+	}
+	
 	public Account(String newName, float newAmount){
 		this.name = newName;
 		this.currentAmount = newAmount;
