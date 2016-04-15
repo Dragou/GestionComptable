@@ -33,6 +33,13 @@ public class Account implements Serializable{
 		
 	}
 	
+	public void showAction(){
+		System.out.println("Toutes les actions sur le comte " + this.name + ": ");
+		for (Actions action : listAction) {
+			action.showAction(action);
+		}
+	}
+	
 	public int getLastIdActions(){
 		ArrayList<Integer> listId = new ArrayList<Integer>();
 		
@@ -45,4 +52,6 @@ public class Account implements Serializable{
 		return max;
 		
 	}
+	
+	
 }
