@@ -2,6 +2,7 @@ package Main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Account implements Serializable{
 
@@ -29,6 +30,19 @@ public class Account implements Serializable{
 	}
 	
 	public void deleteAction(){
+		
+	}
+	
+	public int getLastIdActions(){
+		ArrayList<Integer> listId = new ArrayList<Integer>();
+		
+		for (Actions actions : listAction) {
+			listId.add(actions.getId());			
+		}
+		
+		int max = Collections.max(listId);
+		
+		return max;
 		
 	}
 }

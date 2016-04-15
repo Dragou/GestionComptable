@@ -19,6 +19,11 @@ public class Actions {
 		this.validate = false;
 		this.automated = unAutomated;
 	}
+	
+	public int getId(){
+		return id;
+	}
+	
 
 	//Renvoyer le montant avec un "-" si c'est un débit
 	public float getAmount() {
@@ -33,7 +38,7 @@ public class Actions {
 	
 	public void modifyAction(Actions uneAction){
 		this.categorie = uneAction.categorie;
-		this.type = uneAction.type;
+		this.type = uneAction.type
 		this.amount = uneAction.amount;
 		this.date = uneAction.date;
 		this.validate = uneAction.validate;
