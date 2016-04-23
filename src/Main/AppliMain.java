@@ -5,42 +5,105 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class AppliMain {
-	private static Account myAccount;
+	private static Client user;
 	private static Scanner sc;
+	private static int choice;
 	
 	public static void main(String[] args){
-		int choice = 0;
+		boolean quit = false, quitSub = false;
 		initAccount();
+		int index;
 		do
 		{
-			choice = menu();
+			user.showAllAccount();
+			menu();
 			switch (choice) {
 			case 1:
-				Actions myAction = createAction();
-				myAccount.addAction(myAction);
+				sc = new Scanner(System.in);
+				System.out.println("Saisir le libelle de votre compte :");
+				String libelle = sc.nextLine();
+				System.out.println("Saisir le montant de votre compte :");
+				float amount = sc.nextFloat();
+				Account newAccount = new Account(libelle, amount);
+				user.addAccount(newAccount);
 				break;
-			case 2:
-				myAccount.showAllActions();
 				
+			case 2:
+				sc = new Scanner(System.in);
+				user.showAllAccount();
+				System.out.println("Saisir le numéro du compte à supprimer :");
+				index = sc.nextInt();
+				user.deleteAccount(index);
 				break;
+			
+			case 3:
+				sc = new Scanner(System.in);
+				user.showAllAccount();
+				System.out.println("Saisir le numéro du compte à gérer :");
+				index = sc.nextInt();
+				Account myAccount = user.getOneAccount(index);
+				do
+				{
+					sc = new Scanner(System.in);
+					System.out.println("+-----------MENU-----------+");
+					System.out.println("| 1 - Ajouter une action   |");
+					System.out.println("| 2 - Supprimer une action |");
+					System.out.println("| 3 - Voir les actions     |");
+					System.out.println("| 4 - Quitter              |");
+					System.out.println("+--------------------------+");
+					System.out.println("Que faire?");
+					choice = sc.nextInt();
+					switch (choice) {
+					case 1:
+						Actions myAction = createAction();
+						myAccount.addAction(myAction);
+						break;
+						
+					case 2:
+						myAccount.showAllActions();
+						System.out.println("Saisir le chiffre de la ligne que vous désirez de supprimer :");
+						int deleteIndex = sc.nextInt();
+						myAccount.deleteAction(deleteIndex);
+						break;
+						
+					case 3:
+						myAccount.showAllActions();
+						break;
+						
+					case 4:
+						quitSub = true;
+						break;
+						
+					default:
+						System.out.println("Ceci n'est pas une option");
+						break;
+					}
+				}while(!quitSub);
+				user.updateAccount(myAccount, index);
+				break;
+				
+			case  4:
+				quit = true;
+				break;
+				
 			default:
+				System.out.println("Ceci n'est pas une option");
 				break;
 			}
-		}while(choice != 4);
+		}while(!quit);
 		saveAccount();
 	}
 	
 	private static void saveAccount() {
 		try {
-			FileOutputStream fos = new FileOutputStream("Account.serial");
+			FileOutputStream fos = new FileOutputStream("Client.serial");
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			try {
-				oos.writeObject(myAccount); 
+				oos.writeObject(user);
 				oos.flush();
 				System.out.println("Sauvegarde effectué");
 			} finally {
@@ -67,12 +130,12 @@ public class AppliMain {
 	}
 
 	public static void initAccount(){
-		myAccount = null;
+		user = null;
 		try {
-			FileInputStream fis = new FileInputStream("Account.serial");
+			FileInputStream fis = new FileInputStream("Client.serial");
 			ObjectInputStream ois= new ObjectInputStream(fis);
 			try {	
-				myAccount = (Account) ois.readObject(); 
+				user = (Client) ois.readObject(); 
 			} finally {
 				try {
 					ois.close();
@@ -85,32 +148,27 @@ public class AppliMain {
 		} catch(ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
 		}
-		if(myAccount != null) {
+		if(user != null) {
 			System.out.println("Récupération effectuée");
 		}
 		else
 		{
 			sc = new Scanner(System.in);
-			System.out.println("Saisir le nom de votre compte :");
-			String accountName = sc.nextLine();
-			System.out.println("Saisir le montant initial de votre compte :");
-			float accountAmount = sc.nextFloat();
-			myAccount = new Account(accountName, accountAmount);
+			System.out.println("Saisir votre nom :");
+			String name = sc.nextLine();
+			user = new Client(name);
 		}
 	}
 	
-	public static int menu(){
-		int choice = 0;
-		do {
-			System.out.println("+-----------MENU-----------+");
-			System.out.println("| 1 - Ajouter une action   |");
-			System.out.println("| 2 - Supprimer une action |");
-			System.out.println("| 3 - Voir les actions     |");
-			System.out.println("| 4 - Quitter              |");
-			System.out.println("+--------------------------+");
-			System.out.println("Que faire?");
-			choice = sc.nextInt();
-		} while (choice > 5 || choice < 0);
-		return choice;
+	public static void menu(){
+		sc = new Scanner(System.in);
+		System.out.println("+-----------MENU-----------+");
+		System.out.println("| 1 - Ajouter un compte    |");
+		System.out.println("| 2 - Supprimer un compte  |");
+		System.out.println("| 3 - Gerer un compte      |");
+		System.out.println("| 4 - Quitter              |");
+		System.out.println("+--------------------------+");
+		System.out.println("Que faire?");
+		choice = sc.nextInt();
 	}
 }

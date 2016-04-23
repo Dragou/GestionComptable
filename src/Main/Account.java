@@ -6,6 +6,10 @@ import java.util.Collections;
 
 public class Account implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private float currentAmount;
@@ -29,7 +33,8 @@ public class Account implements Serializable{
 		this.listAction.add(newAction);
 	}
 	
-	public void deleteAction(Actions newAction){
+	public void deleteAction(int indexAction){
+		Actions newAction = this.listAction.get(indexAction - 1);
 		this.listAction.remove(newAction);
 	}
 	
@@ -52,5 +57,7 @@ public class Account implements Serializable{
 		return max;		
 	}
 	
-	
+	public void showAccount() {
+		System.out.println(this.name + " : " + this.currentAmount);
+	}
 }
