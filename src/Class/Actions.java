@@ -1,4 +1,4 @@
-package Main;
+package Class;
 
 import java.util.Date;
 
