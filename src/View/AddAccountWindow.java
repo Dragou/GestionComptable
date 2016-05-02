@@ -1,28 +1,30 @@
 package View;
 
-import javax.swing.JFrame;
-import javax.swing.JTextField;
 
+import javax.swing.JTextField;
+import Class.Account;
 import Controller.AddAccountController;
-import Controller.MainController;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
-public class AddAccountWindow extends JFrame{
+public class AddAccountWindow extends JDialog{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
+	private Account newAccount;
+	private JTextField textField_Name;
+	private JTextField textField_Amount;
+	private JLabel lbl_Name;
+	private JLabel lbl_Amount;
+	private JButton btn_Add;
 	private AddAccountController controller;
 	
 	public AddAccountWindow() {
 		initialize();
+		this.setVisible(true);
 	}
 	
 	private void initialize() {
@@ -30,42 +32,37 @@ public class AddAccountWindow extends JFrame{
 		setTitle("Ajouter un compte");
 		getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(88, 21, 86, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textField_Name = new JTextField();
+		textField_Name.setBounds(88, 21, 86, 20);
+		getContentPane().add(textField_Name);
+		textField_Name.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(88, 52, 86, 20);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textField_Amount = new JTextField();
+		textField_Amount.setBounds(88, 52, 86, 20);
+		getContentPane().add(textField_Amount);
+		textField_Amount.setColumns(10);
 		
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(32, 24, 46, 14);
-		getContentPane().add(lblNewLabel);
+		lbl_Name = new JLabel("Nom du compte :");
+		lbl_Name.setBounds(32, 24, 46, 14);
+		getContentPane().add(lbl_Name);
 		
-		lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(32, 55, 46, 14);
-		getContentPane().add(lblNewLabel_1);
+		lbl_Amount = new JLabel("Montant actuel :");
+		lbl_Amount.setBounds(32, 55, 46, 14);
+		getContentPane().add(lbl_Amount);
 		
-		btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(58, 90, 89, 23);
-		getContentPane().add(btnNewButton);
+		btn_Add = new JButton("Ajouter");
+		btn_Add.setBounds(58, 90, 89, 23);
+		getContentPane().add(btn_Add);
 	}
 	
 	public void InterfaceChange(Object source) {
-		/*if  (source == btn_AddAccount)
+		if  (source == btn_Add)
         {
-            AddAccountWindow newAccountView = new AddAccountWindow();
+			newAccount = new Account(this.textField_Name.getText(), Integer.parseInt(this.textField_Amount.getText()));
         }
-        else if (source == btn_DeleteAccount)
-        {
-        	
-        }
-        else if (source == btn_AddAction)
-        {
-        	//Home();
-        	System.out.println("test");
-        }*/
+	}
+	
+	public Account GetAccount() {
+		return this.newAccount;
 	}
 }

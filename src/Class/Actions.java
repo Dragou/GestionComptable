@@ -26,7 +26,6 @@ public class Actions {
 	public int getId(){
 		return id;
 	}
-	
 
 	//Renvoyer le montant avec un "-" si c'est un débit
 	public float getAmount() {
@@ -47,7 +46,6 @@ public class Actions {
 		System.out.println("Validée: "+ uneAction.validate);
 		System.out.println("Automatisé: "+ uneAction.automated);
 	}
-	
 	
 	public void modifyAction(Actions uneAction){
 		this.libelle = uneAction.libelle;

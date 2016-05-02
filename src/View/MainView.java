@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
 
+import Class.Client;
 import Controller.MainController;
 
 import javax.swing.JComboBox;
@@ -16,6 +17,7 @@ public class MainView extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Client user;
 	private JLabel lbl_Hello;
 	private JTable table_Actions;
 	private JComboBox comboBox_Account;
@@ -24,8 +26,10 @@ public class MainView extends JFrame{
 	private JButton btn_AddAction;
 	private MainController controller; 
 	
-	public MainView() {
+	public MainView(Client newUser) {
+		this.user = newUser;
 		initialize();
+		this.setVisible(true);
 	}
 
 	private void initialize() {
@@ -60,7 +64,9 @@ public class MainView extends JFrame{
 	public void InterfaceChange(Object source) {
 		if  (source == btn_AddAccount)
         {
+			this.enable(false);
             AddAccountWindow newAccountView = new AddAccountWindow();
+            this.user.addAccount(newAccountView.GetAccount());
         }
         else if (source == btn_DeleteAccount)
         {
