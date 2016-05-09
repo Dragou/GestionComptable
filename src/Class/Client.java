@@ -9,12 +9,16 @@ public class Client implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nom;
+	private String name;
 	private ArrayList<Account> listAccount;
 	
+	public Client(){
+		this.name = "";
+		this.listAccount = new ArrayList<Account>();
+	}
+	
 	public Client(String unNom){
-		this.nom = unNom;
-		
+		this.name = unNom;
 		this.listAccount = new ArrayList<Account>();
 	}
 	
@@ -39,5 +43,9 @@ public class Client implements Serializable{
 
 	public void updateAccount(Account myAccount, int index) {
 		this.listAccount.set(index - 1, myAccount);		
+	}
+	
+	public int findAccountIndex(String nameAccount) {
+		return 0;
 	}
 }

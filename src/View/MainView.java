@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 
 import Class.Client;
+import Class.DataManager;
 import Controller.MainController;
 
 import javax.swing.JComboBox;
@@ -26,13 +27,14 @@ public class MainView extends JFrame{
 	private JButton btn_AddAction;
 	private MainController controller; 
 	
-	public MainView(Client newUser) {
-		this.user = newUser;
+	public MainView() {
+		this.user = new Client();
 		initialize();
 		this.setVisible(true);
 	}
 
 	private void initialize() {
+		DataManager.initAccount(user);
 		controller = new MainController(this);
 		getContentPane().setLayout(null);
 		
@@ -70,7 +72,7 @@ public class MainView extends JFrame{
         }
         else if (source == btn_DeleteAccount)
         {
-        	
+        	Object nameDeletedAccount = this.comboBox_Account.getSelectedItem();
         }
         else if (source == btn_AddAction)
         {
