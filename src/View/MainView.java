@@ -12,6 +12,9 @@ import Class.DataManager;
 import Controller.MainController;
 
 import javax.swing.JComboBox;
+import java.awt.Window.Type;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainView extends JFrame{
 	/**
@@ -28,6 +31,7 @@ public class MainView extends JFrame{
 	private MainController controller; 
 	
 	public MainView() {
+		setTitle("ED Gest");
 		this.user = new Client();
 		initialize();
 		this.setVisible(true);
@@ -51,6 +55,7 @@ public class MainView extends JFrame{
 		getContentPane().add(comboBox_Account);
 		
 		btn_AddAccount = new JButton("Ajouter un compte");
+		btn_AddAccount.addActionListener(controller);
 		btn_AddAccount.setBounds(204, 33, 121, 23);
 		getContentPane().add(btn_AddAccount);
 		
@@ -61,6 +66,12 @@ public class MainView extends JFrame{
 		btn_AddAction = new JButton("Ajouter une action");
 		btn_AddAction.setBounds(347, 318, 121, 23);
 		getContentPane().add(btn_AddAction);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+			}
+		});
 	}
 
 	public void InterfaceChange(Object source) {
