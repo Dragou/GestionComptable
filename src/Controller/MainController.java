@@ -6,13 +6,15 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import View.AddAccountView;
+import View.AlertView;
 import View.MainView;
 
 public class MainController implements ActionListener{
 	
-	private MainView myView;
+	private JFrame myView;
 		
-	public MainController(MainView V){
+	public MainController(JFrame V){
 		myView = V;
 	}
 
@@ -20,6 +22,14 @@ public class MainController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object  source=e.getSource();
         
-		myView.InterfaceChange(source);
+		if (myView instanceof AddAccountView){
+			((AddAccountView) myView).InterfaceChange(source);
+		}
+		else if(myView instanceof MainView){
+			((MainView) myView).InterfaceChange(source);
+		}
+		else if(myView instanceof AlertView){
+			((AlertView) myView).InterfaceChange(source);
+		}
 	}
 }

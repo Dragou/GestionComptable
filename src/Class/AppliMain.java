@@ -1,5 +1,7 @@
 package Class;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +18,21 @@ public class AppliMain {
 	
 	public static void main(String[] args){
 //		boolean quit = false, quitSub = false;
-		MainView newView = new MainView();
+		final MainView newView = new MainView();
+/*		newView.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				int reponse = JOptionpane.showConfirmDialog(newView,
+                        "Voulez-vous quitter l'application ?",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+				if (reponse==JoptionPane.YES_OPTION){
+					DataManager.saveAccount(user);
+					newView.dispose();
+				}
+			}
+		}); */
 //		int index;
 //		do
 //		{

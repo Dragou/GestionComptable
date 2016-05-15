@@ -48,4 +48,8 @@ public class Client implements Serializable{
 	public int findAccountIndex(String nameAccount) {
 		return 0;
 	}
+
+	public int getNumberAccount() {
+		return this.listAccount.size();
+	}
 }

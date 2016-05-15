@@ -36,7 +36,7 @@ public class DataManager {
 		}
 	}
 	
-	private static void saveAccount(Client user) {
+	public static void saveAccount(Client user) {
 		try {
 			FileOutputStream fos = new FileOutputStream("Client.serial");
 			ObjectOutputStream oos= new ObjectOutputStream(fos);

@@ -3,32 +3,32 @@ package View;
 
 import javax.swing.JTextField;
 import Class.Account;
-import Controller.AddAccountController;
+import Controller.MainController;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 
-public class AddAccountWindow extends JDialog{
-	/**
-	 * 
-	 */
+public class AddAccountView extends JFrame{
+
 	private static final long serialVersionUID = 1L;
+	private MainView mainView;
 	private Account newAccount;
 	private JTextField textField_Name;
 	private JTextField textField_Amount;
 	private JLabel lbl_Name;
 	private JLabel lbl_Amount;
 	private JButton btn_Add;
-	private AddAccountController controller;
+	private MainController controller;
 	
-	public AddAccountWindow() {
+	public AddAccountView(MainView v) {
 		initialize();
 		this.setVisible(true);
+		this.mainView = v;
 	}
 	
 	private void initialize() {
-		controller = new AddAccountController(this);
+		controller = new MainController(this);
 		setTitle("Ajouter un compte");
 		getContentPane().setLayout(null);
 		
@@ -52,17 +52,15 @@ public class AddAccountWindow extends JDialog{
 		
 		btn_Add = new JButton("Ajouter");
 		btn_Add.setBounds(58, 90, 89, 23);
+		btn_Add.addActionListener(controller);
 		getContentPane().add(btn_Add);
 	}
 	
 	public void InterfaceChange(Object source) {
 		if  (source == btn_Add)
         {
-			newAccount = new Account(this.textField_Name.getText(), Integer.parseInt(this.textField_Amount.getText()));
+			this.mainView.addAccount(this.textField_Name.getText(), Integer.parseInt(this.textField_Amount.getText()));
+			this.dispose();
         }
-	}
-	
-	public Account GetAccount() {
-		return this.newAccount;
 	}
 }
