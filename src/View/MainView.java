@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.MainController;
 import core.Account;
-import core.Actions;
 import core.Client;
 import core.DataManager;
 
@@ -50,7 +49,7 @@ public class MainView extends JFrame{
 		setTitle("ED Gest");
 		DataManager.initAccount(user, "Client.serial");
 		controller = new MainController(this);
-		setDefaultCloseOperation(this.close());
+		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setBounds(0, 0, 570, 400);
 		getContentPane().setLayout(null);
 		
@@ -81,11 +80,6 @@ public class MainView extends JFrame{
 		btn_AddAction = new JButton("Ajouter une action");
 		btn_AddAction.setBounds(378, 316, 166, 23);
 		getContentPane().add(btn_AddAction);
-	}
-
-	private int close() {
-		//DataManager.saveAccount(user, "Client.serial");
-		return this.EXIT_ON_CLOSE;
 	}
 
 	public void interfaceChange(Object source) {

@@ -3,7 +3,7 @@ package core;
 import java.io.Serializable;
 
 public class Actions implements Serializable{
-44444	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String libelle;
 	private String categorie;
