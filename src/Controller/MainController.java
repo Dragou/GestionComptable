@@ -23,13 +23,13 @@ public class MainController implements ActionListener{
 		Object  source=e.getSource();
         
 		if (myView instanceof AddAccountView){
-			((AddAccountView) myView).InterfaceChange(source);
+			((AddAccountView) myView).interfaceChange(source);
 		}
 		else if(myView instanceof MainView){
-			((MainView) myView).InterfaceChange(source);
+			((MainView) myView).interfaceChange(source);
 		}
 		else if(myView instanceof AlertView){
-			((AlertView) myView).InterfaceChange(source);
+			((AlertView) myView).interfaceChange(source);
 		}
 	}
 }

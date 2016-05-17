@@ -1,24 +1,15 @@
-package Class;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Date;
-import java.util.Scanner;
+package core;
 
 import View.MainView;
 
 public class AppliMain {
-	private static Scanner sc;
-	private static int choice;
+	/*private static Scanner sc;
+	private static int choice;*/
 	
 	public static void main(String[] args){
 //		boolean quit = false, quitSub = false;
-		final MainView newView = new MainView();
+		
+		MainView newView = new MainView();
 /*		newView.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
@@ -114,7 +105,7 @@ public class AppliMain {
 //		}while(!quit);
 	}
 
-	private static Actions createAction() {
+	/*private static Actions createAction() {
 		sc = new Scanner(System.in);
 		System.out.println("Saisir la catégorie de votre action :");
 		String cat = sc.nextLine();
@@ -122,8 +113,8 @@ public class AppliMain {
 		String type = sc.nextLine();
 		System.out.println("Saisir le montant :");
 		float amount = sc.nextFloat();
-		return new Actions(1, "Sans titre",cat, type, amount, new Date(), "false");
-	}
+		return new Actions(1, "Sans titre",cat, type, amount, "", "false");
+	}*/
 //	
 //	public static void menu(){
 //		sc = new Scanner(System.in);

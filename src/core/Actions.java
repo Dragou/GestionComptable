@@ -1,18 +1,19 @@
-package Class;
+package core;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class Actions {
+public class Actions implements Serializable{
+44444	private static final long serialVersionUID = 1L;
 	private int id;
 	private String libelle;
 	private String categorie;
 	private String type;
 	private float amount;
-	private Date date;
+	private String date;
 	private Boolean validate;
 	private String automated;
 	
-	public Actions(int unId, String unLibelle,String uneCategorie, String unType, float unAmount, Date uneDate, String unAutomated){
+	public Actions(int unId, String unLibelle,String uneCategorie, String unType, float unAmount, String uneDate, String unAutomated){
 		this.id = unId;
 		this.categorie = uneCategorie;
 		this.libelle = unLibelle;
@@ -69,5 +70,8 @@ public class Actions {
 			
 		return bool;		
 	}
-	
+
+	public Object[] getActionToObject() {
+		return new Object[]{this.libelle, this.getAmount()};
+	}
 }

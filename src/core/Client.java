@@ -1,13 +1,10 @@
-package Class;
+package core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Client implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<Account> listAccount;
@@ -46,10 +43,14 @@ public class Client implements Serializable{
 	}
 	
 	public int findAccountIndex(String nameAccount) {
-		return 0;
+		return this.listAccount.indexOf(new Account(nameAccount, 0));
 	}
 
 	public int getNumberAccount() {
 		return this.listAccount.size();
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }

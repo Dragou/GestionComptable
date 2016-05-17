@@ -39,7 +39,7 @@ public class AlertView extends JFrame{
 		getContentPane().add(lbl_Message);
 	}
 
-	public void InterfaceChange(Object source){
+	public void interfaceChange(Object source){
 		if  (source == btn_Yes){
 			myView.delAccount(true);
 			this.dispose();

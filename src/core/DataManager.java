@@ -1,4 +1,4 @@
-package Class;
+package core;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,10 +8,10 @@ import java.io.ObjectOutputStream;
 
 public class DataManager {
 
-	public static void initAccount(Client user){
+	public static void initAccount(Client user, String fileName){
 		user = null;
 		try {
-			FileInputStream fis = new FileInputStream("Client.serial");
+			FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream ois= new ObjectInputStream(fis);
 			try {	
 				user = (Client) ois.readObject(); 
@@ -36,15 +36,18 @@ public class DataManager {
 		}
 	}
 	
-	public static void saveAccount(Client user) {
+	public static void saveAccount(Client user, String fileName) {
 		try {
-			FileOutputStream fos = new FileOutputStream("Client.serial");
+			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			try {
 				oos.writeObject(user);
 				oos.flush();
+				user.getOneAccount(1).showAccount();
 				System.out.println("Sauvegarde effectué");
-			} finally {
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
 				try {
 					oos.close();
 				} finally {

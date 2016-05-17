@@ -2,8 +2,9 @@ package View;
 
 
 import javax.swing.JTextField;
-import Class.Account;
+
 import Controller.MainController;
+import core.Account;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -13,7 +14,6 @@ public class AddAccountView extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private MainView mainView;
-	private Account newAccount;
 	private JTextField textField_Name;
 	private JTextField textField_Amount;
 	private JLabel lbl_Name;
@@ -56,7 +56,7 @@ public class AddAccountView extends JFrame{
 		getContentPane().add(btn_Add);
 	}
 	
-	public void InterfaceChange(Object source) {
+	public void interfaceChange(Object source) {
 		if  (source == btn_Add)
         {
 			this.mainView.addAccount(this.textField_Name.getText(), Integer.parseInt(this.textField_Amount.getText()));

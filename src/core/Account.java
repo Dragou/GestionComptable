@@ -1,14 +1,12 @@
-package Class;
+package core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Vector;
 
 public class Account implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
@@ -51,13 +49,26 @@ public class Account implements Serializable{
 		for (Actions actions : listAction) {
 			listId.add(actions.getId());			
 		}
-		
-		int max = Collections.max(listId);
-		
-		return max;		
+		try{
+			return Collections.max(listId);
+		}catch(Exception e){
+			return 0;
+		}
 	}
 	
 	public void showAccount() {
 		System.out.println(this.name + " : " + this.currentAmount);
+	}
+
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getNumberActions() {
+		return this.listAction.size();
+	}
+
+	public Object[] getActions(int index) {
+		return this.listAction.get(index).getActionToObject();
 	}
 }
