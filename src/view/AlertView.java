@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -23,6 +23,7 @@ public class AlertView extends JFrame{
 	}
 	
 	private void initialize(String message) {
+		this.setSize(400, 150);
 		getContentPane().setLayout(null);
 		
 		btn_No = new JButton("Non");
@@ -37,6 +38,8 @@ public class AlertView extends JFrame{
 		lbl_Message.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_Message.setBounds(36, 26, 314, 14);
 		getContentPane().add(lbl_Message);
+		
+		this.setVisible(true);
 	}
 
 	public void interfaceChange(Object source){

@@ -1,6 +1,6 @@
 package core;
 
-import View.MainView;
+import view.MainView;
 
 public class AppliMain {
 	/*private static Scanner sc;
@@ -9,7 +9,7 @@ public class AppliMain {
 	public static void main(String[] args){
 //		boolean quit = false, quitSub = false;
 		
-		MainView newView = new MainView();
+		new MainView();
 /*		newView.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {

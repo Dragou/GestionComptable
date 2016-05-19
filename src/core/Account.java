@@ -71,4 +71,28 @@ public class Account implements Serializable{
 	public Object[] getActions(int index) {
 		return this.listAction.get(index).getActionToObject();
 	}
+	
+	public float getAmount(){
+		return this.currentAmount;
+	}
+	
+	public float getCreditSum(){
+		float sum = 0;
+		for (Actions actions : listAction) {
+			if (actions.isCredit()) {
+				sum += actions.getAmount();
+			}
+		}
+		return sum;
+	}
+	
+	public float getDebitSum(){
+		float sum = 0;
+		for (Actions actions : listAction) {
+			if (actions.isDebit()) {
+				sum += actions.getAmount();
+			}
+		}
+		return sum;
+	}
 }

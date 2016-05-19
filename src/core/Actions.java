@@ -72,6 +72,32 @@ public class Actions implements Serializable{
 	}
 
 	public Object[] getActionToObject() {
-		return new Object[]{this.libelle, this.getAmount()};
+		if (this.getAmount() < 0){
+			return new Object[]{this.libelle, this.getAmount(), ""};
+		}
+		else
+		{
+			return new Object[]{this.libelle, "", this.getAmount()};
+		}
+	}
+	
+	public Boolean isCredit(){
+		if (this.type.toUpperCase() == "DEBIT")
+		{
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	public Boolean isDebit(){
+		if (this.type.toUpperCase() == "DEBIT")
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

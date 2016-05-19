@@ -1,14 +1,14 @@
-package Controller;
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
-import View.AddAccountView;
-import View.AlertView;
-import View.MainView;
+import view.AddAccountView;
+import view.AlertView;
+import view.MainView;
 
 public class MainController implements ActionListener{
 	
@@ -21,7 +21,7 @@ public class MainController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object  source=e.getSource();
-        
+		System.out.println(e.getActionCommand());
 		if (myView instanceof AddAccountView){
 			((AddAccountView) myView).interfaceChange(source);
 		}
@@ -31,5 +31,9 @@ public class MainController implements ActionListener{
 		else if(myView instanceof AlertView){
 			((AlertView) myView).interfaceChange(source);
 		}
+	}
+	
+	public void onClick(ButtonActionListener e){
+		
 	}
 }
