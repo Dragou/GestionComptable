@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controller.MainController;
+
 public class AlertView extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -23,15 +25,18 @@ public class AlertView extends JFrame{
 	}
 	
 	private void initialize(String message) {
+		MainController controller = new MainController(this);
 		this.setSize(400, 150);
 		getContentPane().setLayout(null);
 		
 		btn_No = new JButton("Non");
 		btn_No.setBounds(223, 67, 89, 23);
+		btn_No.addActionListener(controller);
 		getContentPane().add(btn_No);
 		
 		btn_Yes = new JButton("Oui");
 		btn_Yes.setBounds(67, 67, 89, 23);
+		btn_Yes.addActionListener(controller);
 		getContentPane().add(btn_Yes);
 		
 		lbl_Message = new JLabel(message);

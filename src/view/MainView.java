@@ -38,10 +38,10 @@ public class MainView extends JFrame{
 		user = new Client("Elise");
 		user.addAccount(new Account("Dimitri", 50));
 		user.addAccount(new Account("Elise", 50));
+		System.out.println(user.getOneAccount(0).getAmount());
 		System.out.println(user.getOneAccount(1).getAmount());
-		System.out.println(user.getOneAccount(2).getAmount());
-		user.getOneAccount(1).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Halo 5", "Jeux", "DEBIT", 50, "", ""));
-		user.getOneAccount(1).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Salaire", "Salaire", "CREDIT", 5, "", ""));
+		user.getOneAccount(0).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Halo 5", "Jeux", "DEBIT", 50, "", ""));
+		user.getOneAccount(0).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Salaire", "Salaire", "CREDIT", 5, "", ""));
 		DataManager.saveAccount(user, "Client.serial");
 		initialize();
 		repaintCombobox();
@@ -128,19 +128,21 @@ public class MainView extends JFrame{
             		tableModel.setRowCount(0);
         		}
         	}
-        		for(int i = 0; i < this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getNumberActions(); i++)
-        		{
-        			tableModel.addRow(this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getActions(i));
-        		}
-        		tableModel.setRowCount(this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getNumberActions());
+        	if (this.comboBox_Account.getSelectedIndex() != -1){
+	    		for(int i = 0; i < this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getNumberActions(); i++)
+	    		{
+	    			tableModel.addRow(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getActions(i));
+	    		}
+	    		tableModel.setRowCount(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getNumberActions());
+        	}
         	
     		table_Actions.setModel(tableModel);
     		table_Actions.repaint();
     		if (comboBox_Account.getSelectedIndex() >= 0)
     		{
-        		lbl_CurrentAmount.setText("Montant actuel du compte : " + this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getAmount());
-        		lbl_Debit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getDebitSum()));
-        		lbl_Credit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex() + 1).getCreditSum()));
+        		lbl_CurrentAmount.setText("Montant actuel du compte : " + this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getAmount());
+        		lbl_Debit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getDebitSum()));
+        		lbl_Credit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getCreditSum()));
     		}
         }
 	}
@@ -153,16 +155,17 @@ public class MainView extends JFrame{
 	
 	public void delAccount(Boolean condition) {
 		if (condition){
-			this.user.deleteAccount(this.user.findAccountIndex(this.comboBox_Account.getSelectedItem().toString()));
+			this.user.deleteAccount(this.comboBox_Account.getSelectedIndex());
 			DataManager.saveAccount(user, "Client.serial");
-			repaintCombobox();
+			this.repaintCombobox();
 		}
 	}
 	
 	private void repaintCombobox() {
 		System.out.println(user.getNumberAccount());
+		this.comboBox_Account.removeAllItems();
 		for (int i = this.comboBox_Account.getItemCount(); i < user.getNumberAccount(); i++) {
-			comboBox_Account.addItem(user.getOneAccount(i + 1).getName());
+			comboBox_Account.addItem(user.getOneAccount(i).getName());
 		}
 	}
 }

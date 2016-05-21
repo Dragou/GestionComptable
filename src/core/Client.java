@@ -24,7 +24,7 @@ public class Client implements Serializable{
 	}
 	
 	public void deleteAccount(int index) {
-		this.listAccount.remove(index - 1);
+		this.listAccount.remove(index);
 	}
 	
 	public void showAllAccount() {
@@ -35,7 +35,7 @@ public class Client implements Serializable{
 	}
 
 	public Account getOneAccount(int index) {
-		return this.listAccount.get(index - 1);
+		return this.listAccount.get(index);
 	}
 
 	public void updateAccount(Account myAccount, int index) {
