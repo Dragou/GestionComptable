@@ -10,8 +10,7 @@ public class Client implements Serializable{
 	private ArrayList<Account> listAccount;
 	
 	public Client(){
-		this.name = "";
-		this.listAccount = new ArrayList<Account>();
+		this("");
 	}
 	
 	public Client(String unNom){

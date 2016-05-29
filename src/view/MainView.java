@@ -2,14 +2,19 @@ package view;
 
 import javax.swing.JFrame;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
 import core.Account;
-import core.Actions;
 import core.Client;
 import core.DataManager;
 
@@ -34,15 +39,6 @@ public class MainView extends JFrame{
 	
 	public MainView() {
 		this.user = new Client();
-		
-		user = new Client("Elise");
-		user.addAccount(new Account("Dimitri", 50));
-		user.addAccount(new Account("Elise", 50));
-		System.out.println(user.getOneAccount(0).getAmount());
-		System.out.println(user.getOneAccount(1).getAmount());
-		user.getOneAccount(0).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Halo 5", "Jeux", "DEBIT", 50, "", ""));
-		user.getOneAccount(0).addAction(new Actions(user.getOneAccount(1).getLastIdActions() + 1, "Salaire", "Salaire", "CREDIT", 5, "", ""));
-		DataManager.saveAccount(user, "Client.serial");
 		initialize();
 		repaintCombobox();
 		this.setVisible(true);
@@ -52,7 +48,11 @@ public class MainView extends JFrame{
 		setTitle("ED Gest");
 		DataManager.initAccount(user, "Client.serial");
 		controller = new MainController(this);
-		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent e) {
+		        System.exit(0);
+		      }});
+		//setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setBounds(0, 0, 570, 450);
 		getContentPane().setLayout(null);
 		
@@ -60,9 +60,9 @@ public class MainView extends JFrame{
 		lbl_Hello.setBounds(10, 11, 534, 14);
 		getContentPane().add(lbl_Hello);
 
-		table_Actions = new JTable();
-		table_Actions.setBounds(10, 65, 534, 240);
-		getContentPane().add(table_Actions);
+		TableActionsModel dm = new TableActionsModel();
+	    TableActions table = new TableActions(dm);
+		getContentPane().add(table);
 		
 		comboBox_Account = new JComboBox<String>();
 		comboBox_Account.addActionListener(controller);
@@ -109,7 +109,8 @@ public class MainView extends JFrame{
         }
         else if (source == btn_DeleteAccount)
         {
-        	new AlertView(this, "Account", this.comboBox_Account.getSelectedItem().toString());
+        	JOptionPane.showMessageDialog(this, ": Ouch!");
+        	//new AlertView(this, "Account", this.comboBox_Account.getSelectedItem().toString());
         }
         else if (source == btn_AddAction)
         {

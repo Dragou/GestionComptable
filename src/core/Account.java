@@ -14,9 +14,7 @@ public class Account implements Serializable{
 	private ArrayList<Actions> listAction;
 	
 	public Account(){
-		this.name = "Sans titre";
-		this.currentAmount = 0;
-		this.listAction = new ArrayList<Actions>();
+		this("Sans titre", 0);
 	}
 	
 	public Account(String newName, float newAmount){
