@@ -8,7 +8,6 @@ public class AppliMain {
 	
 	public static void main(String[] args){
 //		boolean quit = false, quitSub = false;
-		
 		new MainView();
 /*		newView.addWindowListener(new WindowAdapter() {
 			@Override

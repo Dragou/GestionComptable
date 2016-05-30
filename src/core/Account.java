@@ -3,12 +3,10 @@ package core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Vector;
 
 public class Account implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private int id;
 	private String name;
 	private float currentAmount;
 	private ArrayList<Actions> listAction;

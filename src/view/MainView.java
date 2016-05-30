@@ -6,17 +6,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
 import core.Account;
 import core.Client;
 import core.DataManager;
+import core.UnitTest;
 
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -26,13 +22,12 @@ public class MainView extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Client user;
 	private JLabel lbl_Hello;
-	private JTable table_Actions;
+	private TableActions table_Actions;
 	private JComboBox<String> comboBox_Account;
 	private JButton btn_AddAccount;
 	private JButton btn_DeleteAccount;
 	private JButton btn_AddAction;
 	private MainController controller;
-	private DefaultTableModel tableModel;
 	private JLabel lbl_CurrentAmount;
 	private JLabel lbl_Debit;
 	private JLabel lbl_Credit;
@@ -47,12 +42,12 @@ public class MainView extends JFrame{
 	private void initialize() {
 		setTitle("ED Gest");
 		DataManager.initAccount(user, "Client.serial");
+		this.user = UnitTest.Initialisation(this.user);
 		controller = new MainController(this);
 		this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent e) {
 		        System.exit(0);
 		      }});
-		//setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setBounds(0, 0, 570, 450);
 		getContentPane().setLayout(null);
 		
@@ -60,9 +55,8 @@ public class MainView extends JFrame{
 		lbl_Hello.setBounds(10, 11, 534, 14);
 		getContentPane().add(lbl_Hello);
 
-		TableActionsModel dm = new TableActionsModel();
-	    TableActions table = new TableActions(dm);
-		getContentPane().add(table);
+	    table_Actions = new TableActions();
+		getContentPane().add(table_Actions);
 		
 		comboBox_Account = new JComboBox<String>();
 		comboBox_Account.addActionListener(controller);
@@ -109,8 +103,7 @@ public class MainView extends JFrame{
         }
         else if (source == btn_DeleteAccount)
         {
-        	JOptionPane.showMessageDialog(this, ": Ouch!");
-        	//new AlertView(this, "Account", this.comboBox_Account.getSelectedItem().toString());
+        	new AlertView(this, "Account", this.comboBox_Account.getSelectedItem().toString());
         }
         else if (source == btn_AddAction)
         {
@@ -118,29 +111,8 @@ public class MainView extends JFrame{
         }
         else if(source == comboBox_Account)
         {
-        	tableModel = (DefaultTableModel)table_Actions.getModel();
-        	if(tableModel.getRowCount() > 0) {
-        		if (tableModel.getColumnCount() == 0){
-            		tableModel.addColumn("Libelle");
-            		tableModel.addColumn("Débit");
-            		tableModel.addColumn("Crédit");
-            		tableModel.addColumn("Modifier");
-            		tableModel.addColumn("Supprimer");
-            		tableModel.setRowCount(0);
-        		}
-        	}
         	if (this.comboBox_Account.getSelectedIndex() != -1){
-	    		for(int i = 0; i < this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getNumberActions(); i++)
-	    		{
-	    			tableModel.addRow(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getActions(i));
-	    		}
-	    		tableModel.setRowCount(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getNumberActions());
-        	}
-        	
-    		table_Actions.setModel(tableModel);
-    		table_Actions.repaint();
-    		if (comboBox_Account.getSelectedIndex() >= 0)
-    		{
+        		table_Actions.updateTable(user, comboBox_Account.getSelectedIndex());
         		lbl_CurrentAmount.setText("Montant actuel du compte : " + this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getAmount());
         		lbl_Debit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getDebitSum()));
         		lbl_Credit.setText(String.valueOf(this.user.getOneAccount(comboBox_Account.getSelectedIndex()).getCreditSum()));
@@ -148,7 +120,7 @@ public class MainView extends JFrame{
         }
 	}
 	
-	public void addAccount(String name, int amount) {
+	public void addAccount(String name, float amount) {
 		this.user.addAccount(new Account(name, amount));
 		DataManager.saveAccount(user, "Client.serial");
 		repaintCombobox();

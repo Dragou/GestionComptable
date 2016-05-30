@@ -8,17 +8,19 @@ import controller.MainController;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class AddAccountView extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private MainView mainView;
 	private JTextField textField_Name;
-	private JTextField textField_Amount;
 	private JLabel lbl_Name;
 	private JLabel lbl_Amount;
 	private JButton btn_Add;
 	private MainController controller;
+	private JSpinner spinner;
 	
 	public AddAccountView(MainView v) {
 		initialize();
@@ -37,11 +39,6 @@ public class AddAccountView extends JFrame{
 		getContentPane().add(textField_Name);
 		textField_Name.setColumns(10);
 		
-		textField_Amount = new JTextField();
-		textField_Amount.setBounds(131, 52, 86, 20);
-		getContentPane().add(textField_Amount);
-		textField_Amount.setColumns(10);
-		
 		lbl_Name = new JLabel("Nom du compte :");
 		lbl_Name.setBounds(10, 24, 111, 14);
 		getContentPane().add(lbl_Name);
@@ -54,15 +51,19 @@ public class AddAccountView extends JFrame{
 		btn_Add.setBounds(70, 83, 89, 23);
 		btn_Add.addActionListener(controller);
 		getContentPane().add(btn_Add);
+		
+		spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(new Float(0), null, null, new Float(0.5)));
+		spinner.setBounds(131, 52, 86, 20);
+		getContentPane().add(spinner);
 	}
 	
 	public void interfaceChange(Object source) {
 		if  (source == btn_Add)
         {
-			if (this.textField_Amount.getText().length() != 0 && this.textField_Name.getText().length() != 0){
+			if ((float)this.spinner.getValue() != 0 && this.textField_Name.getText().length() != 0){
 				try {
-					Integer.parseInt(this.textField_Amount.getText());
-					this.mainView.addAccount(this.textField_Name.getText(), Integer.parseInt(this.textField_Amount.getText()));
+					this.mainView.addAccount(this.textField_Name.getText(), (float)(this.spinner.getValue()));
 					this.dispose();
 				} catch (Exception e){
 					System.out.println(e.getMessage());

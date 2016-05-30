@@ -2,19 +2,12 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 class ButtonEditor extends DefaultCellEditor {
 	private static final long serialVersionUID = 1L;
@@ -48,7 +41,7 @@ class ButtonEditor extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (isPushed) {
-			JOptionPane.showMessageDialog(button, label + ": Ouch!");
+			new ModifyView();
 		}
 		isPushed = false;
 		return new String(label);

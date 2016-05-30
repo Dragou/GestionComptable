@@ -9,6 +9,7 @@ import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 import view.AddAccountView;
 import view.AlertView;
 import view.MainView;
+import view.ModifyView;
 
 public class MainController implements ActionListener{
 	
@@ -30,6 +31,9 @@ public class MainController implements ActionListener{
 		}
 		else if(myView instanceof AlertView){
 			((AlertView) myView).interfaceChange(source);
+		}
+		else if(myView instanceof ModifyView){
+			((ModifyView) myView).interfaceChange(source);
 		}
 	}
 	
