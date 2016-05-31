@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +26,7 @@ public class MainView extends JFrame{
 	private Client user;
 	private JLabel lbl_Hello;
 	private TableActions table_Actions;
-	private JComboBox<String> comboBox_Account;
+	JComboBox<String> comboBox_Account;
 	private JButton btn_AddAccount;
 	private JButton btn_DeleteAccount;
 	private JButton btn_AddAction;
@@ -55,7 +58,7 @@ public class MainView extends JFrame{
 		lbl_Hello.setBounds(10, 11, 534, 14);
 		getContentPane().add(lbl_Hello);
 
-	    table_Actions = new TableActions();
+	    table_Actions = new TableActions(this);
 		getContentPane().add(table_Actions);
 		
 		comboBox_Account = new JComboBox<String>();
@@ -140,5 +143,29 @@ public class MainView extends JFrame{
 		for (int i = this.comboBox_Account.getItemCount(); i < user.getNumberAccount(); i++) {
 			comboBox_Account.addItem(user.getOneAccount(i).getName());
 		}
+	}
+
+	public void updateAction(String cat, String libelle, float amount, Date date) {
+		this.user.getOneAccount(this.comboBox_Account.getSelectedIndex()).updateAction(this.table_Actions.getSelectedRow(), cat, libelle, amount, date);
+	}
+	
+	public String getNameOfSelectedRow(){
+		int row = this.table_Actions.getSelectedRow();
+		return this.table_Actions.getValueAt(row, 1).toString();
+	}
+	
+	public float getAmountOfSelectedRow(){
+		if (this.table_Actions.getValueAt(this.table_Actions.getSelectedRow(), 2) == null)
+			return (float) this.table_Actions.getValueAt(this.table_Actions.getSelectedRow(), 3);
+		else
+			return (float) this.table_Actions.getValueAt(this.table_Actions.getSelectedRow(), 2);
+	}
+	
+	public String getCatOfSelectedRow(){
+		return this.user.getOneAccount(this.comboBox_Account.getSelectedIndex()).getOneAction(this.table_Actions.getSelectedRow()).getCat();
+	}
+	
+	public Date getDateOfSelecteRow() throws ParseException{
+		return new SimpleDateFormat("dd-MMM-yyyy").parse(this.user.getOneAccount(this.comboBox_Account.getSelectedIndex()).getOneAction(this.table_Actions.getSelectedRow()).getDate());
 	}
 }

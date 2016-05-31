@@ -3,6 +3,7 @@ package core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class Account implements Serializable{
 
@@ -90,5 +91,13 @@ public class Account implements Serializable{
 			}
 		}
 		return sum;
+	}
+
+	public void updateAction(int i, String cat, String libelle, float amount, Date date) {
+		this.listAction.get(i).update(cat, libelle, amount, date);
+	}
+
+	public Actions getOneAction(int selectedRow) {
+		return this.listAction.get(selectedRow - 1);
 	}
 }

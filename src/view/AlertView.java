@@ -21,6 +21,9 @@ public class AlertView extends JFrame{
 		if (obj == "Account"){
 			message = "Etes vous sur de vouloir supprimer le compte " + objName + "?";
 		}
+		if (obj == "Action"){
+			message = "Etes vous sur de vouloir supprimer l'action " + objName + "?";
+		}
 		initialize(message);
 	}
 	

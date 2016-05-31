@@ -1,6 +1,8 @@
 package core;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Actions implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -73,11 +75,11 @@ public class Actions implements Serializable{
 
 	public Object[] getActionToObject() {
 		if (this.getAmount() < 0){
-			return new Object[]{this.libelle, this.getAmount(), ""};
+			return new Object[]{this.libelle, this.getAmount(), "", "Modifier"};
 		}
 		else
 		{
-			return new Object[]{this.libelle, "", this.getAmount()};
+			return new Object[]{this.libelle, "", this.getAmount(), "Modifier"};
 		}
 	}
 	
@@ -99,5 +101,20 @@ public class Actions implements Serializable{
 		else{
 			return false;
 		}
+	}
+
+	public void update(String cat, String libelle2, float amount2, Date date2) {
+		this.amount = amount2;
+		this.categorie = cat;
+		this.date = new SimpleDateFormat("dd/MM/yyyy").format(date2); 
+		this.libelle = libelle2;
+	}
+
+	public String getCat() {
+		return this.categorie;
+	}
+
+	public String getDate() {
+		return this.date;
 	}
 }

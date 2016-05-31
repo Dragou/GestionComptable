@@ -2,11 +2,11 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 class ButtonEditor extends DefaultCellEditor {
@@ -14,9 +14,11 @@ class ButtonEditor extends DefaultCellEditor {
 	protected JButton button;
 	private String label;
 	private boolean isPushed;
+	private MainView mainView;
 
-	public ButtonEditor(JCheckBox checkBox) {
+	public ButtonEditor(JCheckBox checkBox, MainView v) {
 	    super(checkBox);
+	    this.mainView = v;
 	    button = new JButton();
 	    button.setOpaque(true);
 	    button.addActionListener(new ActionListener() {
@@ -41,7 +43,11 @@ class ButtonEditor extends DefaultCellEditor {
 
 	public Object getCellEditorValue() {
 		if (isPushed) {
-			new ModifyView();
+			try {
+				new ModifyView(this.mainView);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
 		isPushed = false;
 		return new String(label);

@@ -12,12 +12,14 @@ import view.ButtonEditor;
 public class TableActions extends JTable{
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel dm;
+	private MainView mainView;
 
-	public TableActions(){
+	public TableActions(MainView v){
 		super();
 		this.setBounds(10, 65, 534, 240);
 		this.dm = new DefaultTableModel();
 	    initializeModel();
+	    this.mainView = v;
 	}
 	
 	public void updateTable(Client user, int numberOfAccount){
@@ -35,7 +37,7 @@ public class TableActions extends JTable{
 	    this.setModel(dm);
 		ButtonRenderer bRenderer = new ButtonRenderer();
 	    this.getColumn("Modify").setCellRenderer(bRenderer);
-	    this.getColumn("Modify").setCellEditor(new ButtonEditor(new JCheckBox()));
+	    this.getColumn("Modify").setCellEditor(new ButtonEditor(new JCheckBox(), this.mainView));
 	    new JScrollPane(this);
 	    this.setVisible(true);
 	}
